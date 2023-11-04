@@ -1,4 +1,5 @@
 import tkinter as tk
+import random
 
 class Util:
 
@@ -21,3 +22,13 @@ class Util:
     @staticmethod
     def update_button(button, value):
         button.config(text=value, state="disabled")
+
+    @staticmethod
+    def get_possible_position(matrix):
+        while True:
+            random_row = random.randint(0,2)
+            random_column = random.randint(0,2)
+
+            random_value = matrix[random_row][random_column]
+            if random_value is None:
+                return random_row, random_column
