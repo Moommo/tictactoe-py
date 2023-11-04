@@ -13,6 +13,7 @@ class TictactoeGui:
     radio_o = None
     button_valider = None
     label_round = None
+    grid = None
 
     def __init__(self, game):
         self.game = game
@@ -25,11 +26,11 @@ class TictactoeGui:
 
 
     def display_grid(self, matrice_grid):
-        grid = tk.Frame(self.window, width=100, height=100)
-        grid.pack()
+        self.grid = tk.Frame(self.window, width=100, height=100)
+        self.grid.pack()
         for i in range(3):
             for j in range(3):
-                Util.create_button(self, grid, self.button_width, self.button_height, i, j, matrice_grid[i][j])
+                Util.create_button(self, self.grid, self.button_width, self.button_height, i, j, matrice_grid[i][j])
 
     def ask_player_symbol(self):
         self.label_symbol = tk.Label(self.window, text="Veuillez choisir un symbole pour commencer la partie:")
@@ -60,7 +61,16 @@ class TictactoeGui:
         self.continued_computer()
 
     def computer_action(self):
+        available_row, available_column = Util.get_possible_position(self.game.actual_grid)
         self.round_computer()
+        button_choose = Util.recover_button(self.grid, available_row, available_column)
+        value = self.game.make_computer_action(available_row, available_column)
+        self.window.after(1000, self.end_action_computer, button_choose, value)
+
+    def end_action_computer(self, button_choose, value):
+        Util.update_button(button_choose, value)
+        self.destroy_round()
+        self.continued_player()
 
     def initialize_game(self):
         self.ask_player_symbol()
