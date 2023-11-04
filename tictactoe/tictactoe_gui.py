@@ -12,6 +12,7 @@ class TictactoeGui:
     radio_x = None
     radio_o = None
     button_valider = None
+    label_round = None
 
     def __init__(self, game):
         self.game = game
@@ -55,15 +56,26 @@ class TictactoeGui:
     def player_action(self, row, column, button):
         value = self.game.make_player_action(row, column)
         Util.update_button(button, value)
-        print(self.game.actual_grid)
+        self.destroy_round_player1()
 
     def initialize_game(self):
         self.ask_player_symbol()
         self.open_window()
 
+    def round_player1(self):
+        self.label_round = tk.Label(self.window, text="C'est à toi de jouer clique sur une case vide !!", font=("Helvetica", 20, "bold"), fg="red")
+        self.label_round.pack()
+
+    def destroy_round_player1(self):
+        self.label_round.destroy()
+
     def run(self):
         self.destroy_ask_symbol(),
         self.display_grid(self.game.actual_grid)
+        while not self.game.end_game:
+            self.game.run_game(self)
+            self.game.end_game = True
+        print("end")
 
     def open_window(self):
         self.window.mainloop()
