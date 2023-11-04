@@ -1,11 +1,11 @@
 class TictactoeGame:
     actual_grid = [[None, None, None], [None, None, None], [None, None, None]]
-    end_game = False
-    player1 = None
-    computer = None
-    winner = None
 
     def __init__(self):
+        self.end_game = False
+        self.player1 = None
+        self.computer = None
+        self.winner = None
         pass
 
     def define_player_symbol(self, symbol1):
@@ -41,3 +41,9 @@ class TictactoeGame:
         if len(set(matrice[y][2 - y] for y in range(3))) == 1 and matrice[0][2] is not None:
             self.winner = matrice[0][2]
             self.end_game = True
+
+    def player_is_winner(self):
+        if self.winner == self.player1:
+            return True
+        else:
+            return False
