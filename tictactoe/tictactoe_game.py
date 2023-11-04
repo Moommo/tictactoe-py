@@ -18,6 +18,7 @@ class TictactoeGame:
 
     def make_player_action(self, row, column):
         self.actual_grid[row][column] = self.player1
+        self.is_end_game()
         return self.player1
 
 
