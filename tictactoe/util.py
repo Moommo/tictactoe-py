@@ -24,6 +24,11 @@ class Util:
         button.config(text=value, state="disabled")
 
     @staticmethod
+    def recover_button(parent, row, column):
+        button = parent.grid_slaves(row=row, column=column)[0]
+        return button
+
+    @staticmethod
     def get_possible_position(matrix):
         while True:
             random_row = random.randint(0,2)
