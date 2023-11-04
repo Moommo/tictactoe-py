@@ -2,7 +2,7 @@ class TictactoeGame:
     actual_grid = [["", "", ""], ["", "", ""], ["", "", ""]]
     end_game = False
     player1 = None
-    player2 = None
+    computer = None
     winner = None
 
     def __init__(self):
@@ -11,10 +11,10 @@ class TictactoeGame:
     def define_player_symbol(self, symbol1):
         if symbol1 == "x":
             self.player1 = "x"
-            self.player2 = "o"
+            self.computer = "o"
         else:
             self.player1 = "o"
-            self.player2 = "x"
+            self.computer = "x"
 
     def make_player_action(self, row, column):
         self.actual_grid[row][column] = self.player1
