@@ -56,26 +56,55 @@ class TictactoeGui:
     def player_action(self, row, column, button):
         value = self.game.make_player_action(row, column)
         Util.update_button(button, value)
-        self.destroy_round_player1()
+        self.destroy_round()
+        self.continued_computer()
+
+    def computer_action(self):
+        self.round_computer()
 
     def initialize_game(self):
         self.ask_player_symbol()
         self.open_window()
 
-    def round_player1(self):
-        self.label_round = tk.Label(self.window, text="C'est à toi de jouer clique sur une case vide !!", font=("Helvetica", 20, "bold"), fg="red")
+    def round_player(self):
+        self.label_round = tk.Label(self.window, text="C'est à toi de jouer clique sur une case vide !!",
+                                    font=("Helvetica", 20, "bold"), fg="red")
         self.label_round.pack()
 
-    def destroy_round_player1(self):
+    def round_computer(self):
+        self.label_round = tk.Label(self.window, text="C'est le tour de l'ordinateur de jouer, attend ton tour !! ",
+                                    font=("Helvetica", 20, "bold"), fg="cyan")
+        self.label_round.pack()
+
+    def destroy_round(self):
         self.label_round.destroy()
+
+    def continued_computer(self):
+        if not self.game.end_game:
+            self.computer_action()
+        else:
+            self.end()
+
+    def continued_player(self):
+        if not self.game.end_game:
+            self.round_player()
+        else:
+            self.end()
 
     def run(self):
         self.destroy_ask_symbol(),
         self.display_grid(self.game.actual_grid)
-        while not self.game.end_game:
-            self.game.run_game(self)
-            self.game.end_game = True
-        print("end")
+        self.continued_player()
+
+    def end(self):
+        if self.game.player_is_winner():
+            text = "Félicitation tu es le gagnant, bravo"
+        else:
+            text = "Dommage tu as perdu, retente la chance la prochaine fois"
+
+        self.label_round = tk.Label(self.window, text=text,
+                                    font=("Helvetica", 20, "bold"), fg="blue")
+        self.label_round.pack()
 
     def open_window(self):
         self.window.mainloop()
