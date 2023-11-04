@@ -37,3 +37,8 @@ class Util:
             random_value = matrix[random_row][random_column]
             if random_value is None:
                 return random_row, random_column
+
+    @staticmethod
+    def create_button_with_color(parent, value, action, color):
+        button = tk.Button(parent, text=value, command=action, bg=color)
+        button.pack()
