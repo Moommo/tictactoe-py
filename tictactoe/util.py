@@ -8,8 +8,8 @@ class Util:
         def on_click_callback():
             gui_instance.player_action(row, column, button)
 
-        if value == "":
-            button = tk.Button(parent, text=value, command=lambda: on_click_callback())
+        if value is None:
+            button = tk.Button(parent, text="", command=lambda: on_click_callback())
             button.config(width=width, height=height)
         else :
             #create button with image X or O
