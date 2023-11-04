@@ -21,6 +21,10 @@ class TictactoeGame:
         self.is_end_game()
         return self.player1
 
+    def make_computer_action(self, row, column):
+        self.actual_grid[row][column] = self.computer
+        self.is_end_game()
+        return self.computer
 
     def is_end_game(self):
         matrice = self.actual_grid
