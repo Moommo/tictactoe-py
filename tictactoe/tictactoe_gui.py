@@ -115,6 +115,7 @@ class TictactoeGui:
         self.label_round = tk.Label(self.window, text=text,
                                     font=("Helvetica", 20, "bold"), fg="blue")
         self.label_round.pack()
+        self.display_end_buttons()
 
     def open_window(self):
         self.window.mainloop()
@@ -122,3 +123,5 @@ class TictactoeGui:
     def close_window(self):
         self.window.destroy()
 
+    def display_end_buttons(self):
+        button_close = Util.create_button_with_color(self.window, "Quitter", self.close_window, "red")
