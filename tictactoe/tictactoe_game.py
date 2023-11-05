@@ -1,12 +1,13 @@
 class TictactoeGame:
-    actual_grid = [[None, None, None], [None, None, None], [None, None, None]]
+
 
     def __init__(self):
+        self.actual_grid = [[None, None, None], [None, None, None], [None, None, None]]
         self.end_game = False
         self.player1 = None
         self.computer = None
         self.winner = None
-        pass
+
 
     def define_player_symbol(self, symbol1):
         if symbol1 == "x":
