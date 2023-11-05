@@ -20,8 +20,8 @@ class TictactoeGui:
         self.window = tk.Tk()
         self.window.title("Tic Tac Toe")
         self.window.geometry(f"{self.window_width}x{self.window_height}")
-        message_label = tk.Label(self.window, text="Bienvenue dans mon monde 😀 ", font=("Helvetica", 26))
-        message_label.pack(pady=20)
+        self.message_welcome_label = tk.Label(self.window, text="Bienvenue dans mon monde 😀 ", font=("Helvetica", 26))
+        self.message_welcome_label.pack(pady=20)
         self.initialize_game()
 
 
@@ -124,4 +124,16 @@ class TictactoeGui:
         self.window.destroy()
 
     def display_end_buttons(self):
-        button_close = Util.create_button_with_color(self.window, "Quitter", self.close_window, "red")
+        Util.create_button_with_color(self.window, "Rejouer", self.play_again, "green")
+        Util.create_button_with_color(self.window, "Quitter", self.close_window, "red")
+
+    def play_again(self):
+        self.clean_window()
+        self.game.__init__()
+        self.initialize_game()
+        print("recommencer")
+
+    def clean_window(self):
+        for element in self.window.winfo_children():
+            if element != self.message_welcome_label:
+                element.destroy()
